@@ -25,17 +25,11 @@ ${OASIS_NET_RUNNER} dump-fixture \
   --fixture.default.deterministic_entities \
   --fixture.default.fund_entities \
   --fixture.default.num_entities 2 \
-  --fixture.default.keymanager.binary "${EMERALD_PARATIME}" \
+  --fixture.default.keymanager.binary "" \
   --fixture.default.runtime.binary "${EMERALD_PARATIME}" \
   --fixture.default.runtime.provisioner "unconfined" \
   --fixture.default.halt_epoch 100000 \
   --fixture.default.staking_genesis "${STAKING_GENESIS_FILE}" >"$FIXTURE_FILE"
-
-# oasis-core 22.0 has a bug where you cannot provision a fixture without a keymanager.
-# When updating to oasis-core 22.0.1 remove below hack and updaate abobe keymanager.binary to "".
-# Disable keymanager for runtime.
-jq '.runtimes[1].keymanager = -1' "$FIXTURE_FILE" >"$FIXTURE_FILE.tmp"
-mv "$FIXTURE_FILE.tmp" "$FIXTURE_FILE"
 
 # Enable expensive queries for testing.
 jq '.clients[0].runtime_config."1".allow_expensive_queries = true' "$FIXTURE_FILE" >"$FIXTURE_FILE.tmp"
