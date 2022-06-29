@@ -22,8 +22,9 @@ type Config struct {
 	// blocks that the node doesn't have data for, such as by skipping them in checkpoint sync.
 	// For sensible reasons, indexing may actually start at an even later block, such as if
 	// this block is already indexed or the node indicates that it doesn't have this block.
-	IndexingStart   uint64 `koanf:"indexing_start"`
-	IndexingDisable bool   `koanf:"indexing_disable"`
+	IndexingStart     uint64 `koanf:"indexing_start"`
+	IndexingDisable   bool   `koanf:"indexing_disable"`
+	IndexingSQLFollow bool   `koanf:"indexing_sql_follow"`
 
 	Log      *LogConfig      `koanf:"log"`
 	Cache    *CacheConfig    `koanf:"cache"`

@@ -195,7 +195,7 @@ func runRoot() error {
 	// For now, "disable" write access to the DB in a kind of kludgy way
 	// if the indexer is disabled.  Yes this means that no migrations
 	// can be done.  Deal with it.
-	dbReadOnly := cfg.IndexingDisable
+	dbReadOnly := cfg.IndexingDisable || cfg.IndexingSQLFollow
 
 	// Initialize db for migrations (higher timeouts).
 	db, err := psql.InitDB(ctx, cfg.Database, true, dbReadOnly)
